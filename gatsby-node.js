@@ -78,7 +78,8 @@ function recursiveFolders(array, parent = '', token, destination) {
           }
 
           if (buffer === null) {
-            resolve();
+            resolve(getFilenameByMime(file));
+            return log(`Saved file ${getFilenameByMime(file)}`);
           } else {
             // Finally, write buffer to file.
             fs.writeFile(dest, buffer, err => {

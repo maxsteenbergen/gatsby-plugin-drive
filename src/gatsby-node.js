@@ -93,7 +93,7 @@ function recursiveFolders(array, parent = '', token, destination) {
       }
     }
 
-    return Promise.all(promises).then(() => {resolve(); return log('all done')});
+    Promise.all(promises).then(() => resolve());
   });
 }
 

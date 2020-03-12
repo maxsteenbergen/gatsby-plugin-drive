@@ -1,12 +1,13 @@
 # gatsby-plugin-drive
 
 Downloads and caches a Google Drive folder that you can then query with `gatsby-source-filesystem`.
-Optionally exports Google Docs to a usable format.
+Optionally exports Google Docs and sheets to a usable format.
+Heavily derived from the work of [Fabian Schultz](https://github.com/fabe/gatsby-plugin-drive); I stand on the shoulders of giants.
 
 ## Installation
 
 ```bash
-yarn add @fs/gatsby-plugin-drive
+yarn add gatsby-plugin-drive-docs-sheets
 ```
 
 ## Usage
@@ -18,13 +19,15 @@ In order to use this plugin, you'll need to generate a Google Service Account an
 
 plugins: [
   {
-    resolve: '@fs/gatsby-plugin-drive',
+    resolve: 'gatsby-plugin-drive-docs-sheets',
     options: {
       folderId: 'GOOGLE_DRIVE_FOLDER_ID',
       keyFile: path.resolve(__dirname, 'YOUR_SERVICE_ACCOUNT_KEYFILE.json'),
       destination: path.join(__dirname, 'src/content'),
       exportGDocs: true,
-      exportMimeType: 'text/html',
+      exportDocMimeType: 'application/pdf',
+      exportGSheets: true,
+      exportSheetMimeType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
       exportMiddleware: someFunction
     }
   }
@@ -34,7 +37,7 @@ plugins: [
 
 plugins: [
   {
-    resolve: '@fs/gatsby-plugin-drive',
+    resolve: 'gatsby-plugin-drive-docs-sheets',
     options: {
       folderId: process.env.GOOGLE_DRIVE_FOLDER_ID,
       key: {
@@ -43,7 +46,9 @@ plugins: [
       },
       destination: path.join(__dirname, 'src/content'),
       exportGDocs: true,
-      exportMimeType: 'text/html',
+      exportDocMimeType: 'application/pdf',
+      exportGSheets: true,
+      exportSheetMimeType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
       exportMiddleware: someFunction
     }
   }
